@@ -1,0 +1,77 @@
+<!--Greedy: The Dice Game-->
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Greedy: The Dice Game</title>
+
+        <!--Link styles-->
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/reset.css">
+        
+
+        <!--Google Fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <!--Header-->
+        <div class="header">
+            <h1>Greedy: The Dice Game</h1>
+        </div>
+
+        <!--The game is in a div centered on the page-->
+        <div class="game">
+            <div class="dice">
+                <img class="die" id="die1" src="assets/images/one.jpg" onclick="imgClick(id)"/>
+                <img class="die" id="die2" src="assets/images/two.jpg" onclick="imgClick(id)"/>
+                <img class="die" id="die3" src="assets/images/three.jpg" onclick="imgClick(id)"/>
+                <img class="die" id="die4" src="assets/images/four.jpg" onclick="imgClick(id)"/>
+                <img class="die" id="die5" src="assets/images/five.jpg" onclick="imgClick(id)"/>
+                <img class="die" id="die6" src="assets/images/six.jpg" onclick="imgClick(id)"/>
+            </div>
+            <div class="buttons">
+                <button type="button" id="roll-button" onclick="rollClick()">ROLL</button>
+                <button type="button" id="end-turn-button" onclick="endTurnClick()">END TURN</button>
+            </div>
+            <div class="reset">
+                <button type="button" id="reset-button" onclick="reset()">RESET</button>
+            </div>
+        </div>
+
+        <!--Displays the score for the current game-->
+        <div class="theScore">
+            <h2 id="h2score">Score:</h2>
+            <div id="p1score"></div>
+            <div id="p2score"></div>
+        </div>
+
+        <!--Displays the rules of the game-->
+        <div class="theRules">
+            <h2 id="h2rules">Rules:</h2>
+            <p><span class="firstword">Object:</span> Be the first player to get more than 10,000 points. The player with the most points wins.</p>
+            <p><span class="firstword">Getting Started:</span> To start earning points, each player must roll at least 500 points on their turn.</p>
+            <p><span class="firstword">Game Play:</span></p>
+                <ul class="list">
+                    <li>The player rolls the dice and selects which ones they would like use for score. If they don't roll any ONES, FIVES, or other scoring combinations, then their turn is over.</li>
+                    <li>Only ONES and FIVES may count by themselves. Other numbers must be Three-Of-A-Kind or more.</li>
+                    <li>Once the player selects one or more of the dice, they may roll the remaining dice again in attempt to earn more points.</li>
+                    <li>If all six of your dice count for points, you get six more dice to keep rolling and earning points.</li>
+                    <li>BE CAREFUL: If at any time you roll no scoring dice, your turn is over and you lose all the points you rolled on that turn.</li>
+                    <li>You may stop rolling at any time, take your points and pass the dice.</li>
+                    <li>When one player reaches 10,000 points or more, the other player gets one more turn to try and beat their score.</li>
+                    <li>Highest score over 10,000 points wins the game!</li>
+                </ul>
+        </div>
+
+        <!--Displays point values of dice-->
+        <div class="scoringCombos">
+            <h2 id="h2scoring">Scoring Combos:</h2>
+        </div>
+
+        <!--Javascript-->
+        <script type="text/javascript" src="assets/javascript/game.js"></script>
+
+    </body>
+</html>
