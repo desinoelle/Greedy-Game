@@ -13,66 +13,63 @@ var dice = [
 //Array that determines which dice have been selected (starts as false)
 var selected = [false, false, false, false, false, false];
 
-//Variable that determines the first roll
-var firstRoll = true;
+//Only allows dice selection after the first roll
+var canSelect = false;
 
 //Score variables (start at 0)
 var p1score = 0;
 var p2score = 0;
-var p1scoreDiv = document.getElementById("p1score");
-var p2scoreDiv = document.getElementById("p2score");
-p1scoreDiv.textContent = "Player One: " + p1score;
-p2scoreDiv.textContent = "Player Two: " + p2score;
+$("#p1score").text("Player One: " + p1score);
+$("#p2score").text("Player Two: " + p2score);
 
 function rollClick() {
     //Holds random dice roll
     var randomRoll;
 
-    //Random dice roll (first roll before anything is selected)
-    if (firstRoll === true) {
+    //Can now select dice for points
+    canSelect = true;
+
+    //Random dice roll
         for (var i = 0; i < dice.length; i++) {
             randomRoll = Math.floor(Math.random() * dice.length);
     
-            //Store dice rolls and change the image source
-            if (randomRoll === 0) {
-                dice[i] = "one";
-                document.getElementById("die" + (i + 1)).src = "assets/images/one.jpg";
-            }
-            if (randomRoll === 1) {
-                dice[i] = "two";
-                document.getElementById("die" + (i + 1)).src = "assets/images/two.jpg";
-            }
-            if (randomRoll === 2) {
-                dice[i] = "three";
-                document.getElementById("die" + (i + 1)).src = "assets/images/three.jpg";
-            }
-            if (randomRoll === 3) {
-                dice[i] = "four";
-                document.getElementById("die" + (i + 1)).src = "assets/images/four.jpg";
-            }
-            if (randomRoll === 4) {
-                dice[i] = "five";
-                document.getElementById("die" + (i + 1)).src = "assets/images/five.jpg";
-            }
-            if (randomRoll === 5) {
-                dice[i] = "six";
-                document.getElementById("die" + (i + 1)).src = "assets/images/six.jpg";
-            }
+            //Only roll unselected dice
+            if (selected[i] === false) {
+
+                //Store dice rolls and change the image source
+                if (randomRoll === 0) {
+                    dice[i] = "one";
+                    $("#die" + (i + 1)).attr("src", "assets/images/one.jpg");
+                    //document.getElementById("die" + (i + 1)).src = "assets/images/one.jpg";
+                }
+                if (randomRoll === 1) {
+                    dice[i] = "two";
+                    $("#die" + (i + 1)).attr("src", "assets/images/two.jpg");
+                    //document.getElementById("die" + (i + 1)).src = "assets/images/two.jpg";
+                }
+                if (randomRoll === 2) {
+                    dice[i] = "three";
+                    $("#die" + (i + 1)).attr("src", "assets/images/three.jpg");
+                    //document.getElementById("die" + (i + 1)).attr("src", ) = "assets/images/three.jpg";
+                }
+                if (randomRoll === 3) {
+                    dice[i] = "four";
+                    $("#die" + (i + 1)).attr("src", "assets/images/four.jpg");
+                    //document.getElementById("die" + (i + 1)).attr("src", ) = "assets/images/four.jpg";
+                }
+                if (randomRoll === 4) {
+                    dice[i] = "five";
+                    $("#die" + (i + 1)).attr("src", "assets/images/five.jpg");
+                    //document.getElementById("die" + (i + 1)).attr("src", ) = "assets/images/five.jpg";
+                }
+                if (randomRoll === 5) {
+                    dice[i] = "six";
+                    $("#die" + (i + 1)).attr("src", "assets/images/six.jpg");
+                    //document.getElementById("die" + (i + 1)).src = "assets/images/six.jpg";
+                }
+            }     
         }
-    }
-
-    //The user may only press the roll button again if they select at least one die with point value
-    if (firstRoll === false) {
-        for (var i = 0; i < dice.length; i++) {
-            
-        }
-    }
-
-    firstRoll = false;
-
-    console.log(firstRoll);
     
-
     console.log(dice);
 }
 
@@ -81,15 +78,19 @@ function endTurnClick() {
 
 function imgClick(id) {
 
-    //Give the image a border if selected
-    for (var i = 0; i < dice.length; i++) {
-        if (selected[i] === false && id === "die" + (i+1)) {
-            document.getElementById("die" + (i + 1)).style.border = "2px solid red";
-            selected[i] = true;
-        }
-        else if (selected[i] === true && id === "die" + (i+1)) {
-            document.getElementById("die" + (i + 1)).style.border = "none";
-            selected[i] = false;
+    //Only select if there has been a roll first
+    if (canSelect === true) {
+
+        //Give the image a border if selected
+        for (var i = 0; i < dice.length; i++) {
+            if (selected[i] === false && id === "die" + (i+1)) {
+                $("#die" + (i + 1)).css("border", "2px solid red");
+                selected[i] = true;
+            }
+            else if (selected[i] === true && id === "die" + (i+1)) {
+                $("#die" + (i + 1)).css("border", "none");
+                selected[i] = false;
+            }
         }
     }
 
@@ -102,46 +103,45 @@ function reset() {
     for (var i = 0; i < dice.length; i++) {
         if (i === 0) {
             dice[i] = "one";
-            document.getElementById("die" + (i + 1)).style.border = "none";
+            $("#die" + (i + 1)).css("border", "none");
             selected[i] = false;
-            document.getElementById("die" + (i + 1)).src = "assets/images/one.jpg";
+            $("#die" + (i + 1)).attr("src", "assets/images/one.jpg");
         }
         if (i === 1) {
             dice[i] = "two";
-            document.getElementById("die" + (i + 1)).style.border = "none";
+            $("#die" + (i + 1)).css("border", "none");
             selected[i] = false;
-            document.getElementById("die" + (i + 1)).src = "assets/images/two.jpg";
+            $("#die" + (i + 1)).attr("src", "assets/images/two.jpg");
         }
         if (i === 2) {
             dice[i] = "three";
-            document.getElementById("die" + (i + 1)).style.border = "none";
+            $("#die" + (i + 1)).css("border", "none");
             selected[i] = false;
-            document.getElementById("die" + (i + 1)).src = "assets/images/three.jpg";
+            $("#die" + (i + 1)).attr("src", "assets/images/three.jpg");
         }
         if (i === 3) {
             dice[i] = "four";
-            document.getElementById("die" + (i + 1)).style.border = "none";
+            $("#die" + (i + 1)).css("border", "none");
             selected[i] = false;
-            document.getElementById("die" + (i + 1)).src = "assets/images/four.jpg";
+            $("#die" + (i + 1)).attr("src", "assets/images/four.jpg");
         }
         if (i === 4) {
             dice[i] = "five";
-            document.getElementById("die" + (i + 1)).style.border = "none";
+            $("#die" + (i + 1)).css("border", "none");
             selected[i] = false;
-            document.getElementById("die" + (i + 1)).src = "assets/images/five.jpg";
+            $("#die" + (i + 1)).attr("src", "assets/images/five.jpg");
         }
         if (i === 5) {
             dice[i] = "six";
-            document.getElementById("die" + (i + 1)).style.border = "none";
+            $("#die" + (i + 1)).css("border", "none");
             selected[i] = false;
-            document.getElementById("die" + (i + 1)).src = "assets/images/six.jpg";
+            $("#die" + (i + 1)).attr("src", "assets/images/six.jpg");
         }
     }
 
-    firstRoll = true;
-
     p1score = 0;
     p2score = 0;
+    canSelect = false;
 
     console.log(dice, selected, p1score, p2score, firstRoll);
 }

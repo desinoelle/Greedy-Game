@@ -85,6 +85,18 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+.alerts {
+    position: absolute;
+    top: 350px;
+    right: 90px;
+    height: 185px;
+    width: 20%;
+    background-color: #efefef;
+    border: 3px solid #6df9a8;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
 #h2rules {
     font-size: 25px;
     text-align: center;
