@@ -1,85 +1,149 @@
 <!--Greedy: The Dice Game-->
 <!DOCTYPE html>
 <html lang="en-us">
-    <head>
-        <meta charset="UTF-8">
-        <title>Greedy: The Dice Game</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greedy: The Dice Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
 
-        <!-- Added link to the jQuery Library -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <div class="felt-texture"></div>
 
-        <!--Link styles-->
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/reset.css">
-        
-
-        <!--Google Fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    </head>
-
-    <body>
-
-        <!--Header-->
-        <div class="header">
-            <h1>Greedy: The Dice Game</h1>
+    <header class="header">
+        <div class="header-inner">
+            <div class="suit">♠</div>
+            <h1>GREEDY</h1>
+            <div class="subtitle">The Dice Game</div>
+            <div class="suit">♦</div>
         </div>
+    </header>
 
-        <!--The game is in a div centered on the page-->
-        <div class="game">
-            <div class="dice">
-                <img class="die" id="die1" src="assets/images/one.jpg" onclick="imgClick(id)"/>
-                <img class="die" id="die2" src="assets/images/two.jpg" onclick="imgClick(id)"/>
-                <img class="die" id="die3" src="assets/images/three.jpg" onclick="imgClick(id)"/>
-                <img class="die" id="die4" src="assets/images/four.jpg" onclick="imgClick(id)"/>
-                <img class="die" id="die5" src="assets/images/five.jpg" onclick="imgClick(id)"/>
-                <img class="die" id="die6" src="assets/images/six.jpg" onclick="imgClick(id)"/>
+    <main class="layout">
+
+        <!-- Rules Panel -->
+        <aside class="panel rules-panel">
+            <h2 class="panel-title">How to Play</h2>
+            <div class="rule-section">
+                <h3>Object</h3>
+                <p>Be the first player to reach <strong>10,000 points</strong>. When one player hits 10,000, the other gets one final turn to beat their score.</p>
             </div>
+            <div class="rule-section">
+                <h3>Getting On the Board</h3>
+                <p>You must score at least <strong>500 points in a single turn</strong> before you can start banking points.</p>
+            </div>
+            <div class="rule-section">
+                <h3>Your Turn</h3>
+                <ol>
+                    <li>Roll all six dice.</li>
+                    <li>Select at least one scoring die.</li>
+                    <li>Choose to <strong>roll again</strong> with the remaining dice, or <strong>end your turn</strong> to bank your points.</li>
+                    <li>If you roll and score <strong>nothing</strong>, you lose all unbanked points and your turn ends.</li>
+                    <li>If <strong>all six dice score</strong>, pick them all up and keep rolling!</li>
+                </ol>
+            </div>
+            <div class="rule-section">
+                <h3>Scoring</h3>
+                <table class="score-table">
+                    <tr><td>Single 1</td><td>100 pts</td></tr>
+                    <tr><td>Single 5</td><td>50 pts</td></tr>
+                    <tr><td>Three 1s</td><td>1,000 pts</td></tr>
+                    <tr><td>Three 2s</td><td>200 pts</td></tr>
+                    <tr><td>Three 3s</td><td>300 pts</td></tr>
+                    <tr><td>Three 4s</td><td>400 pts</td></tr>
+                    <tr><td>Three 5s</td><td>500 pts</td></tr>
+                    <tr><td>Three 6s</td><td>600 pts</td></tr>
+                    <tr><td>Four of a kind</td><td>2× three-of-a-kind</td></tr>
+                    <tr><td>Five of a kind</td><td>3× three-of-a-kind</td></tr>
+                    <tr><td>Six of a kind</td><td>4× three-of-a-kind</td></tr>
+                    <tr><td>1–6 Straight</td><td>1,500 pts</td></tr>
+                    <tr><td>Three Pairs</td><td>1,500 pts</td></tr>
+                </table>
+            </div>
+        </aside>
+
+        <!-- Main Game Area -->
+        <section class="game-area">
+
+            <div class="turn-indicator">
+                <span id="turn-label">Player 1's Turn</span>
+            </div>
+
+            <div class="dice-container" id="dice-container">
+                <div class="die-wrapper">
+                    <div class="die" id="die1" onclick="dieClick(0)">
+                        <div class="die-face" id="face1"></div>
+                    </div>
+                </div>
+                <div class="die-wrapper">
+                    <div class="die" id="die2" onclick="dieClick(1)">
+                        <div class="die-face" id="face2"></div>
+                    </div>
+                </div>
+                <div class="die-wrapper">
+                    <div class="die" id="die3" onclick="dieClick(2)">
+                        <div class="die-face" id="face3"></div>
+                    </div>
+                </div>
+                <div class="die-wrapper">
+                    <div class="die" id="die4" onclick="dieClick(3)">
+                        <div class="die-face" id="face4"></div>
+                    </div>
+                </div>
+                <div class="die-wrapper">
+                    <div class="die" id="die5" onclick="dieClick(4)">
+                        <div class="die-face" id="face5"></div>
+                    </div>
+                </div>
+                <div class="die-wrapper">
+                    <div class="die" id="die6" onclick="dieClick(5)">
+                        <div class="die-face" id="face6"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="turn-score-display">
+                Turn score: <span id="turn-score">0</span>
+                <span id="selected-score-label"></span>
+            </div>
+
             <div class="buttons">
-                <button type="button" id="roll-button" onclick="rollClick()">ROLL</button>
-                <button type="button" id="end-turn-button" onclick="endTurnClick()">END TURN</button>
+                <button id="roll-button" onclick="rollClick()">ROLL</button>
+                <button id="end-turn-button" onclick="endTurnClick()" disabled>END TURN</button>
             </div>
-            <div class="reset">
-                <button type="button" id="reset-button" onclick="reset()">RESET</button>
+
+            <div class="alert-box" id="alert-box"></div>
+
+            <button id="reset-button" onclick="resetGame()">↺ NEW GAME</button>
+
+        </section>
+
+        <!-- Score Panel -->
+        <aside class="panel score-panel">
+            <h2 class="panel-title">Scoreboard</h2>
+            <div class="player-score" id="p1-card">
+                <div class="player-name">Player 1</div>
+                <div class="player-points" id="p1score">0</div>
+                <div class="player-label">points</div>
             </div>
-        </div>
+            <div class="divider">VS</div>
+            <div class="player-score" id="p2-card">
+                <div class="player-name">Player 2</div>
+                <div class="player-points" id="p2score">0</div>
+                <div class="player-label">points</div>
+            </div>
+            <div class="target-info">
+                <div class="target-label">Target</div>
+                <div class="target-score">10,000</div>
+            </div>
+        </aside>
 
-        <!--Displays the score for the current game-->
-        <div class="theScore">
-            <h2 id="h2score">Score:</h2>
-            <div id="p1score"></div>
-            <div id="p2score"></div>
-        </div>
+    </main>
 
-        <!--Alert Box-->
-        <div class="alerts">
-            <div id="alert"></div>
-        </div>
-
-        <!--Displays the rules of the game-->
-        <div class="theRules">
-            <h2 id="h2rules">Rules:</h2>
-            <p><span class="firstword">Object:</span> Be the first player to get more than 10,000 points. The player with the most points wins.</p>
-            <p><span class="firstword">Getting Started:</span> To start earning points, each player must roll at least 500 points on their turn.</p>
-            <p><span class="firstword">Game Play:</span></p>
-                <ul class="list">
-                    <li>The player rolls the dice and selects which ones they would like use for score. If they don't roll any ONES, FIVES, or other scoring combinations, then their turn is over.</li>
-                    <li>Only ONES and FIVES may count by themselves. Other numbers must be Three-Of-A-Kind or more.</li>
-                    <li>Once the player selects one or more of the dice, they may roll the remaining dice again in attempt to earn more points.</li>
-                    <li>If all six of your dice count for points, you get six more dice to keep rolling and earning points.</li>
-                    <li>BE CAREFUL: If at any time you roll no scoring dice, your turn is over and you lose all the points you rolled on that turn.</li>
-                    <li>You may stop rolling at any time, take your points and pass the dice.</li>
-                    <li>When one player reaches 10,000 points or more, the other player gets one more turn to try and beat their score.</li>
-                    <li>Highest score over 10,000 points wins the game!</li>
-                </ul>
-        </div>
-
-        <!--Displays point values of dice-->
-        <div class="scoringCombos">
-            <h2 id="h2scoring">Scoring Combos:</h2>
-        </div>
-
-        <!--Javascript-->
-        <script type="text/javascript" src="assets/javascript/game.js"></script>
-
-    </body>
+    <script src="assets/javascript/game.js"></script>
+</body>
 </html>
