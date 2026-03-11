@@ -1,6 +1,5 @@
 // =============================================
 // GREEDY: THE DICE GAME
-// Complete rewrite with full scoring logic
 // =============================================
 
 // ---- GAME STATE ----
