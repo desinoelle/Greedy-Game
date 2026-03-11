@@ -123,7 +123,9 @@ const PIP_LAYOUTS = {
 function updateDieClasses() {
     for (let i = 0; i < 6; i++) {
         const el = document.getElementById(`die${i + 1}`);
+        const isRolling = el.classList.contains('rolling');
         el.className = 'die';
+        if (isRolling) el.classList.add('rolling');
         if (state.held[i]) el.classList.add('held');
         else if (state.selected[i]) el.classList.add('selected');
     }
@@ -171,14 +173,17 @@ function setButtonStates() {
     const rollBtn = document.getElementById('roll-button');
     const endBtn = document.getElementById('end-turn-button');
 
-    // Can roll if: game not over AND (haven't rolled yet OR have selected at least one die)
     const hasSelected = state.selected.some(s => s);
+
+    // Can roll on first roll of a turn, or after selecting at least one die
     const canRoll = !state.gameOver && (!state.hasRolled || hasSelected);
     rollBtn.disabled = !canRoll;
 
-    // Can end turn if: have rolled AND have accumulated some turn score AND not zero
-    const selectedScore = getSelectedScore();
-    const totalTurnScore = state.turnScore + selectedScore;
+    // Can end turn only after rolling and having points to bank
+    const heldValues = state.dice.filter((_, i) => state.held[i]);
+    const selectedValues = state.dice.filter((_, i) => state.selected[i]);
+    const allBankable = [...heldValues, ...selectedValues];
+    const totalTurnScore = allBankable.length > 0 ? calculateScore(allBankable).score : 0;
     const canEnd = state.hasRolled && totalTurnScore > 0 && !state.gameOver;
     endBtn.disabled = !canEnd;
 }
