@@ -1,5 +1,6 @@
 // =============================================
 // GREEDY: THE DICE GAME
+// Complete rewrite with full scoring logic
 // =============================================
 
 // ---- GAME STATE ----
@@ -96,7 +97,19 @@ function getScoringDiceIndices(diceValues, indices) {
 }
 
 // ---- DICE RENDERING ----
-// Draw pips using CSS grid layout
+const FACE_NAMES = ['one', 'two', 'three', 'four', 'five', 'six'];
+
+function renderDie(index, value) {
+    if (!value) return;
+    const img = document.getElementById(`die${index + 1}`);
+    img.src = `assets/images/${FACE_NAMES[value - 1]}.jpg`;
+}
+
+function renderAllDice() {
+    state.dice.forEach((val, i) => renderDie(i, val));
+}
+
+// ---- UNUSED PIP LAYOUTS (kept for reference) ----
 const PIP_LAYOUTS = {
     1: [[{ gridArea: '2/2' }]],
     2: [[{ gridArea: '1/1' }], [{ gridArea: '3/3' }]],
@@ -106,30 +119,7 @@ const PIP_LAYOUTS = {
     6: [[{ gridArea: '1/1' }], [{ gridArea: '1/3' }], [{ gridArea: '2/1' }], [{ gridArea: '2/3' }], [{ gridArea: '3/1' }], [{ gridArea: '3/3' }]],
 };
 
-function renderDie(index, value) {
-    const face = document.getElementById(`face${index + 1}`);
-    face.innerHTML = '';
-    face.style.cssText = `
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-        width: 100%;
-        height: 100%;
-        padding: 8px;
-    `;
-    if (!value) return;
-    const pips = PIP_LAYOUTS[value] || [];
-    pips.forEach(pip => {
-        const dot = document.createElement('div');
-        dot.className = 'pip';
-        dot.style.gridArea = pip[0].gridArea;
-        face.appendChild(dot);
-    });
-}
 
-function renderAllDice() {
-    state.dice.forEach((val, i) => renderDie(i, val));
-}
 
 function updateDieClasses() {
     for (let i = 0; i < 6; i++) {
@@ -423,4 +413,3 @@ function resetGame() {
 
 // ---- INIT ----
 resetGame();
-
