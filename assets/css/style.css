@@ -240,6 +240,7 @@ body {
     user-select: none;
     object-fit: cover;
     border: 3px solid transparent;
+    pointer-events: auto;
 }
 
 .die:hover:not(.held):not(.farkled) {
