@@ -52,4 +52,4 @@ Both players share the same browser window and take turns.
 
 ## About
 
-Built as a personal project to practice JavaScript logic and DOM manipulation. Greedy was one of my earliest forays into programming game mechanics — scoring combinations, turn management, and push-your-luck risk/reward systems all implemented from scratch.
+Built as a personal project to practice JavaScript logic and DOM manipulation. Greedy was one of my earliest forays into programming game mechanics - scoring combinations, turn management, and push-your-luck risk/reward systems all implemented from scratch.
