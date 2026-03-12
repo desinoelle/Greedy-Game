@@ -10,7 +10,7 @@
 
 ## Overview
 
-Greedy is a two-player dice game built with vanilla JavaScript, HTML, and CSS. Players take turns rolling six dice, banking points from scoring combinations, and deciding whether to push their luck for more — or walk away before they lose it all.
+Greedy is a two-player dice game built with vanilla JavaScript, HTML, and CSS. Players take turns rolling six dice, banking points from scoring combinations, and deciding whether to push their luck for more, or walk away before they lose it all.
 
 The first player to reach **10,000 points** wins, but the other player gets one final turn to beat their score.
 
